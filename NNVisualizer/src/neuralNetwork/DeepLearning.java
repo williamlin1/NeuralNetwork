@@ -56,8 +56,6 @@ public class DeepLearning {
 	public double train(int m){
 		
 		
-		
-		
 		return 0.0;
 	}
 	
@@ -65,15 +63,31 @@ public class DeepLearning {
 		
 		
 		
+		return 0.0;
+	}
+	
+	public double forwardProp(){
 		
+		//Performs forward propogation
 		
 		return 0.0;
 	}
 	
+	public double backProp(){
+		
+		//Performs backward propogation
+		
+		return 0.0;
+		
+	}
 	
 	//Path to a file giving training data
+	//returns true if loaded successfully, false otherwise
 	public boolean load(String filepath){
 		dataset = filepath;
 		return false;
 	}
+	
+	
+	
 }
