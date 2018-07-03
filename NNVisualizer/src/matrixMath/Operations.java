@@ -52,9 +52,17 @@ public class Operations {
 			}else{
 				//throw an exception about size not being met
 			}
+		}else if(first.length == second.length && first[0].length == second[0].length){
+			for(int i =0; i < first.length; i++){
+				for(int j = 0; j < first[0].length; j++){
+					values[i][j] += first[i][j] + second[i][j];
+				}
+			}
 		}else{
-			//throw an exception that i will add to a list
+			//Throw an exception
 		}
+			//throw an exception that i will add to a list
+		
 		
 		return values;
 	}
@@ -72,10 +80,10 @@ public class Operations {
 			}
 		}
 		
-		if(first[0].length == second.length){
+		if(aCols == bRows){
 			for (int i = 0; i < aRows; i++) { // aRow
-	            for (int j = 0; j < bCols; j++) { // bColumn
-	                for (int k = 0; k < aCols; k++) { // aColumn
+	            for (int j = 0; j < bCols; j++) { // bCols
+	                for (int k = 0; k < aCols; k++) { // aCols
 	                    values[i][j] += first[i][k] * second[k][j];
 	                }
 	            }
