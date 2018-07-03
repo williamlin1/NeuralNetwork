@@ -2,7 +2,7 @@ package matrixMath;
 
 import java.util.Random;
 
-public class Math {
+public class Operations {
 
 	public static double[][] generate2D(int row, int col){
 		double[][] values = new double[row][col];
@@ -57,6 +57,33 @@ public class Math {
 		}
 		
 		return values;
+	}
+	
+	public static double[][] multiply(double[][] first, double[][] second){
+		double[][] values = new double[first.length][first[0].length];
+		
+		int aRows = first.length;
+		int aCols = first[0].length;
+		int bRows = second.length;
+		int bCols = second[0].length;
+		for(int i =0; i < aRows; i++){
+			for(int j = 0; j < bCols; j++){
+				values[i][j] = 0.000;
+			}
+		}
+		
+		if(first[0].length == second.length){
+			for (int i = 0; i < aRows; i++) { // aRow
+	            for (int j = 0; j < bCols; j++) { // bColumn
+	                for (int k = 0; k < aCols; k++) { // aColumn
+	                    values[i][j] += first[i][k] * second[k][j];
+	                }
+	            }
+	        }
+		}else{
+			//Throw an error
+		}
+		return values; 
 	}
 	
 	

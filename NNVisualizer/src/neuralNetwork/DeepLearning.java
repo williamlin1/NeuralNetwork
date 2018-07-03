@@ -44,14 +44,16 @@ public class DeepLearning {
 		}
 		
 		for(int i = 0; i < layers; i++){
-			W.add(matrixMath.Math.generate2D(nodes.get(i+1), nodes.get(i)));
-			B.add(matrixMath.Math.generate2D(nodes.get(i+1), 1));
+			W.add(matrixMath.Operations.generate2D(nodes.get(i+1), nodes.get(i)));
+			B.add(matrixMath.Operations.generate2D(nodes.get(i+1), 1));
 		}
+		
+		//Generated a random W and B
 		
 	}
 	
 	
-	public double train(){
+	public double train(int m){
 		
 		
 		
