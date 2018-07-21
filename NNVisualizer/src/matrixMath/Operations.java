@@ -21,6 +21,17 @@ public class Operations {
 		return values;
 	}
 	
+	public static double[][] zeros(int row, int col){
+		double[][] values = new double[row][col];
+		for(int i =0; i < row; i++) {
+			for(int j = 0; j < col; j++) {
+				values[i][j] = 0;
+			}
+		}
+		return values;
+	}
+	
+	
 	public static double[][] broadcastSum(double[][] first, double[][] second){
 		double[][] values = new double[first.length][first[0].length];
 		

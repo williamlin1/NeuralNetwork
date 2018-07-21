@@ -6,8 +6,7 @@ public class ActivationFunction {
 	/*
 	 * This class provides a variety of activation functions and their
 	 * computations that can be tested within the Deep Learning class.
-	 * Currently supported is sigmoid, tanh
-	 * Will implement RELU and Leaky RELU later
+	 * Currently supported is sigmoid, tanh, RELU, Leaky RELU
 	 */
 	
 	
@@ -17,13 +16,16 @@ public class ActivationFunction {
 	}
 	
 	//Performs sigmoid function on an array of values
-	public static double[] sigmoid(double[] x){
-		int len = x.length;
-		double[] values = new double[len];
-		for(int i =0; i < len; i++){
-			values[i] = sigmoid(x[i]);
+	public static Matrix sigmoid(Matrix input){
+		int rows = input.rows;
+		int cols = input.cols;
+		double[][] data = new double[rows][cols];
+		for(int i =0; i < rows; i++) {
+			for(int j = 0; j < cols; j++) {
+				data[i][j] = sigmoid(input.data[i][j]);
+			}
 		}
-		return values;	
+		return new Matrix(data);
 	}
 	
 	//Returns the derivative of the sigmoid function at x
@@ -32,43 +34,115 @@ public class ActivationFunction {
 	}
 	
 	//Returns derivative of the sigmoid function on array of values
-	public static double[] slopeSigmoid(double[] x){
-		int len = x.length;
-		double[] values = new double[len];
-		for(int i =0; i < len; i++){
-			values[i] = slopeSigmoid(x[i]);
+	public static Matrix slopeSigmoid(Matrix input){
+		int rows = input.rows;
+		int cols = input.cols;
+		double[][] data = new double[rows][cols];
+		for(int i =0; i < rows; i++) {
+			for(int j = 0; j < cols; j++) {
+				data[i][j] = slopeSigmoid(input.data[i][j]);
+			}
 		}
-		return values;
+		return new Matrix(data);
 	}
 	
 	public static double tanh(double x){
 		return Math.tanh(x);
 	}
 	
-	public static double[] tanh(double[] x){
-		int len = x.length;
-		double[] values = new double[len];
-		
-		for(int i =0; i < len; i++){
-			values[i] = tanh(x[i]);
+	public static Matrix tanh(Matrix input){
+		int rows = input.rows;
+		int cols = input.cols;
+		double[][] data = new double[rows][cols];
+		for(int i =0; i < rows; i++) {
+			for(int j = 0; j < cols; j++) {
+				data[i][j] = tanh(input.data[i][j]);
+			}
 		}
-		return values;
+		return new Matrix(data);
 	}
 	
 	public static double slopeTanh(double x){
 		return (1 - Math.pow(tanh(x),tanh(x)));
 	}
 	
-	public static double[] slopeTanh(double[] x){
-		int len = x.length;
-		double[] values = new double[len];
-		
-		for(int i =0; i < len; i++){
-			values[i] = slopeTanh(x[i]);
+	public static Matrix slopeTanh(Matrix input){
+		int rows = input.rows;
+		int cols = input.cols;
+		double[][] data = new double[rows][cols];
+		for(int i =0; i < rows; i++) {
+			for(int j = 0; j < cols; j++) {
+				data[i][j] = slopeTanh(input.data[i][j]);
+			}
 		}
-		return values;
+		return new Matrix(data);
 	}
 
-	//TODO: add documentation and RELU/Leaky RELU
+	public static double RELU(double x) {
+		if(x>=0) {
+			return x;
+		}else {
+			return 0;
+		}
+	}
 	
+	public static Matrix RELU(Matrix input){
+		int rows = input.rows;
+		int cols = input.cols;
+		double[][] data = new double[rows][cols];
+		for(int i =0; i < rows; i++) {
+			for(int j = 0; j < cols; j++) {
+				data[i][j] = RELU(input.data[i][j]);
+			}
+		}
+		return new Matrix(data);
+	}
+	
+	public static double slopeRELU(double x) {
+		return x>=0?1:0;
+	}
+	
+	public static Matrix slopeRELU(Matrix input){
+		int rows = input.rows;
+		int cols = input.cols;
+		double[][] data = new double[rows][cols];
+		for(int i =0; i < rows; i++) {
+			for(int j = 0; j < cols; j++) {
+				data[i][j] = slopeRELU(input.data[i][j]);
+			}
+		}
+		return new Matrix(data);
+	}
+	
+	public static double LeakyRELU(double x) {
+		return x>=0?x:0.01*x;
+	}
+	
+	public static Matrix LeakyRELU(Matrix input){
+		int rows = input.rows;
+		int cols = input.cols;
+		double[][] data = new double[rows][cols];
+		for(int i =0; i < rows; i++) {
+			for(int j = 0; j < cols; j++) {
+				data[i][j] = LeakyRELU(input.data[i][j]);
+			}
+		}
+		return new Matrix(data);
+	}
+	
+	public static double slopeLeakyRELU(double x) {
+		return x>=0?1:0.01;
+	}
+	
+	public static Matrix slopeLeakyRELU(Matrix input){
+		int rows = input.rows;
+		int cols = input.cols;
+		double[][] data = new double[rows][cols];
+		for(int i =0; i < rows; i++) {
+			for(int j = 0; j < cols; j++) {
+				data[i][j] = slopeLeakyRELU(input.data[i][j]);
+			}
+		}
+		return new Matrix(data);
+	}
 }
