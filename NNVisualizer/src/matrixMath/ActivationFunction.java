@@ -6,16 +6,18 @@ public class ActivationFunction {
 	/*
 	 * This class provides a variety of activation functions and their
 	 * computations that can be tested within the Deep Learning class.
-	 * Currently supported is sigmoid, tanh, RELU, Leaky RELU
+	 * Currently supported is sigmoid, tanh, RELU, Leaky RELU and gives
+	 * their slopes.
+	 * Can take in either a double for a single computation or a Matrix
 	 */
 	
 	
-	//Performs sigmoid function on a single value
+	//Performs Sigmoid function on a single value
 	public static double sigmoid(double x){
 		return 1/(1+Math.pow(Math.E,-x));	
 	}
 	
-	//Performs sigmoid function on an array of values
+	//Performs Sigmoid function on each element in a Matrix;
 	public static Matrix sigmoid(Matrix input){
 		int rows = input.rows;
 		int cols = input.cols;
@@ -33,7 +35,7 @@ public class ActivationFunction {
 		return sigmoid(x)*(1-sigmoid(x));
 	}
 	
-	//Returns derivative of the sigmoid function on array of values
+	//Returns derivative of the sigmoid function on each element in a Matrix
 	public static Matrix slopeSigmoid(Matrix input){
 		int rows = input.rows;
 		int cols = input.cols;
@@ -46,10 +48,12 @@ public class ActivationFunction {
 		return new Matrix(data);
 	}
 	
+	//Returns the Tanh of a double
 	public static double tanh(double x){
 		return Math.tanh(x);
 	}
 	
+	//Returns the Tanh of each element in a Matrix
 	public static Matrix tanh(Matrix input){
 		int rows = input.rows;
 		int cols = input.cols;

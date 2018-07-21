@@ -2,6 +2,8 @@ package neuralNetwork;
 
 import java.util.ArrayList;
 
+import matrixMath.Matrix;
+
 public class DeepLearning {
 
 	
@@ -13,8 +15,8 @@ public class DeepLearning {
 	String dataset;
 	
 	ArrayList<Integer> nodes;
-	ArrayList<double[][]> W = new ArrayList<>();
-	ArrayList<double[][]> B = new ArrayList<>();
+	ArrayList<Matrix> W = new ArrayList<>();
+	ArrayList<Matrix> B = new ArrayList<>();
 	
 	//numLayers is the number of layers, including the output node, but not including the inputs
 	//numPer should have a length of 1 less than the number of layers because the output layer always has 1

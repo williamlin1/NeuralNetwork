@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Operations {
 
-	public static double[][] generate2D(int row, int col){
+	public static Matrix generate2D(int row, int col){
 		double[][] values = new double[row][col];
 		
 		Random gen = new Random();
@@ -18,73 +18,71 @@ public class Operations {
 			}
 		}
 		
-		return values;
+		return new Matrix(values);
 	}
 	
-	public static double[][] zeros(int row, int col){
+	public static Matrix zeros(int row, int col){
 		double[][] values = new double[row][col];
 		for(int i =0; i < row; i++) {
 			for(int j = 0; j < col; j++) {
 				values[i][j] = 0;
 			}
 		}
-		return values;
+		return new Matrix(values);
 	}
 	
 	
-	public static double[][] broadcastSum(double[][] first, double[][] second){
-		double[][] values = new double[first.length][first[0].length];
+	public static Matrix broadcastSum(Matrix first, Matrix second){
+		double[][] values = new double[first.rows][first.cols];
 		
 		
 		//If it is an integer
-		if(second.length==1 && second[0].length == 1){
-			for(int i =0; i < first.length; i++){
-				for(int j = 0; j < first[0].length; j++){
-					values[i][j] = first[i][j] + second[0][0];
+		if(second.rows==1 && second.cols == 1){
+			for(int i =0; i < first.rows; i++){
+				for(int j = 0; j < first.cols; j++){
+					values[i][j] = first.data[i][j] + second.data[0][0];
 				}
 			}
-		}else if(second.length == 1){
-			if(second[0].length == first[0].length){
-				for(int i =0; i < first.length; i++){
-					for(int j = 0; j < first[0].length; j++){
-						values[i][j] = first[i][j]+second[0][j];
+		}else if(second.rows == 1){
+			if(second.cols == first.cols){
+				for(int i =0; i < first.rows; i++){
+					for(int j = 0; j < first.cols; j++){
+						values[i][j] = first.data[i][j]+second.data[0][j];
 					}
 				}
 			}else{
 				//throw an exception about size not being met
 			}
-		}else if(second[0].length == 1){
-			if(second.length == first.length){
-				for(int i =0; i < first.length; i++){
-					for(int j = 0; j < first[0].length; j++){
-						values[i][j] = first[i][j]+second[i][0];
+		}else if(second.cols == 1){
+			if(second.rows == first.rows){
+				for(int i =0; i < first.rows; i++){
+					for(int j = 0; j < first.cols; j++){
+						values[i][j] = first.data[i][j]+second.data[i][0];
 					}
 				}
 			}else{
 				//throw an exception about size not being met
 			}
-		}else if(first.length == second.length && first[0].length == second[0].length){
-			for(int i =0; i < first.length; i++){
-				for(int j = 0; j < first[0].length; j++){
-					values[i][j] += first[i][j] + second[i][j];
+		}else if(first.rows == second.rows && first.cols == second.cols){
+			for(int i =0; i < first.rows; i++){
+				for(int j = 0; j < first.cols; j++){
+					values[i][j] = first.data[i][j] + second.data[i][j];
 				}
 			}
 		}else{
 			//Throw an exception
-		}
-			//throw an exception that i will add to a list
+		}		
 		
-		
-		return values;
+		return new Matrix(values);
 	}
 	
-	public static double[][] multiply(double[][] first, double[][] second){
-		double[][] values = new double[first.length][first[0].length];
+	public static Matrix multiply(Matrix first, Matrix second){
+		double[][] values = new double[first.rows][first.cols];
 		
-		int aRows = first.length;
-		int aCols = first[0].length;
-		int bRows = second.length;
-		int bCols = second[0].length;
+		int aRows = first.rows;
+		int aCols = first.cols;
+		int bRows = second.rows;
+		int bCols = second.cols;
 		for(int i =0; i < aRows; i++){
 			for(int j = 0; j < bCols; j++){
 				values[i][j] = 0.000;
@@ -95,14 +93,14 @@ public class Operations {
 			for (int i = 0; i < aRows; i++) { // aRow
 	            for (int j = 0; j < bCols; j++) { // bCols
 	                for (int k = 0; k < aCols; k++) { // aCols
-	                    values[i][j] += first[i][k] * second[k][j];
+	                    values[i][j] += first.data[i][k] * second.data[k][j];
 	                }
 	            }
 	        }
 		}else{
 			//Throw an error
 		}
-		return values; 
+		return new Matrix(values); 
 	}
 	
 	public static double[][] transpose(double[][] matrix){
@@ -115,16 +113,5 @@ public class Operations {
 		
 		return values;
 	}
-	
-	
-	public static void print(double[][] matrix){
-		for(int i =0; i < matrix.length; i++){
-			for(int j =0; j < matrix[0].length; j++){
-				System.out.print(matrix[i][j] + " ");
-			}
-			System.out.println("");
-		}
-	}
-	
 	
 }
