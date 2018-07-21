@@ -16,15 +16,15 @@ public class Matrix {
 	
 	public Matrix(double[][] data) {
 		this.data = data;
-		int rows = data.length;
-		int cols = data[0].length;
+		rows = data.length;
+		cols = data[0].length;
 		Transpose = Operations.transpose(data);
 	}
 	
 	public Matrix setMatrix(double[][] data){
 		this.data = data;
-		int rows = data.length;
-		int cols = data[0].length;
+		rows = data.length;
+		cols = data[0].length;
 		Transpose = Operations.transpose(data);
 		return this;
 	}
