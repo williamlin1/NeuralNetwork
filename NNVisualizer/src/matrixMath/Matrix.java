@@ -37,4 +37,13 @@ public class Matrix {
 			System.out.println(" ");
 		}
 	}
+	
+	public double toDouble() {
+		if(rows == 1 && cols == 1) {
+			return data[0][0];
+		}else {
+			//There is a sizing issue
+			return -500;
+		}
+	}
 }

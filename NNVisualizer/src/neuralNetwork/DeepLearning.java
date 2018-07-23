@@ -3,6 +3,7 @@ package neuralNetwork;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import matrixMath.Container;
 import matrixMath.Matrix;
 import matrixMath.Operations;
 
@@ -49,7 +50,17 @@ public class DeepLearning {
 		return 0.0;
 	}
 	
-	public double forwardProp(){
+	public Container linearForward(Matrix A, Matrix W, Matrix B) {
+		
+	}
+	
+	public double forwardProp(double prevA, Matrix W, Matrix B, String function){
+		
+		if(function.equals("RELU")) {
+			
+		}else if(function.equals("Sigmoid")) {
+			
+		}
 		
 		//Performs forward propogation
 		
@@ -74,7 +85,7 @@ public class DeepLearning {
 	public void initializeParameters(int[] layerDims) {
 		for(int i =1; i < layerDims.length; i++) {
 			W.put("W"+String.valueOf(i), Operations.generate2D(layerDims[i], layerDims[i-1]));
-			B.put("B" + String.valueOf(i), Operations.generate2D(layerDims[i], 1));
+			B.put("B" + String.valueOf(i), Operations.zeros(layerDims[i], 1));
 		}
 	}
 	
