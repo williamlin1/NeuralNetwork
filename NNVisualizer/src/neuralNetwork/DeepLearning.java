@@ -3,9 +3,7 @@ package neuralNetwork;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import matrixMath.Container;
-import matrixMath.Matrix;
-import matrixMath.Operations;
+import matrixMath.*;
 
 public class DeepLearning {
 
@@ -51,20 +49,36 @@ public class DeepLearning {
 	}
 	
 	public Container linearForward(Matrix A, Matrix W, Matrix B) {
-		
+		Matrix Z = Operations.broadcastSum(Operations.multiply(W, A),B);
+		HashMap<String, Matrix> temp = new HashMap<>();
+		temp.put("A", A);
+		temp.put("W", W);
+		temp.put("B", B);
+		HashMap<String, Object> temp2 = new HashMap<>();
+		temp2.put("Z", Z);
+		temp2.put("cache", temp);
+		Container container = new Container(temp2);
+		return container;
 	}
 	
-	public double forwardProp(double prevA, Matrix W, Matrix B, String function){
-		
+	public Container forwardProp(Matrix prevA, Matrix W, Matrix B, String function){
+		Container linearResult = linearForward(prevA, W, B);
+		Matrix A;
 		if(function.equals("RELU")) {
-			
+			A = ActivationFunction.RELU((Matrix)linearResult.getCache().get("Z"));
 		}else if(function.equals("Sigmoid")) {
-			
+			A = ActivationFunction.sigmoid((Matrix)linearResult.getCache().get("Z"));
+		}else {
+			A = Operations.zeros(1, 1);
 		}
-		
-		//Performs forward propogation
-		
-		return 0.0;
+		HashMap<String, Object> temp = new HashMap<>();
+		temp.put("A", A);
+		HashMap<String, Object> cache = new HashMap<>();
+		cache.put("prevA", ((HashMap<String,Object>) linearResult.getCache().get("cache")).get("A"));
+		cache.put("W", ((HashMap<String,Object>) linearResult.getCache().get("cache")).get("W"));
+		cache.put("B", ((HashMap<String,Object>) linearResult.getCache().get("cache")).get("B"));
+		cache.put("Z", linearResult.getCache().get("Z"));
+		return new Container(cache);
 	}
 	
 	public double backProp(){

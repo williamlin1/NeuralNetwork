@@ -4,19 +4,13 @@ import java.util.HashMap;
 
 public class Container {
 	
-	HashMap<String,Matrix> cache;
-	int integer;
+	HashMap<String,Object> cache;
 	
-	public Container(int integer, HashMap<String,Matrix> cache) {
-		this.integer = integer;
+	public Container(HashMap<String,Object> cache) {
 		this.cache = cache;
 	}
 	
-	public int getInt() {
-		return integer;
-	}
-	
-	public HashMap<String,Matrix> getCache() {
+	public HashMap<String,Object> getCache() {
 		return cache;
 	}
 }
