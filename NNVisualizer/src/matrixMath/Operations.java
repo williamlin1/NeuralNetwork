@@ -8,12 +8,12 @@ public class Operations {
 		double[][] values = new double[row][col];
 		
 		Random gen = new Random();
-		//Generates a 2d array from 0.01 to 100
+		//Generates a 2d array from 0.0001 to 1
 		for(int i =0; i < row; i++){
 			for(int j = 0; j < col; j++){
-				values[i][j] = gen.nextDouble()*100;
+				values[i][j] = gen.nextDouble();
 				if(values[i][j] == 0){
-					values[i][j] = 0.01;
+					values[i][j] = 0.0001;
 				}
 			}
 		}
@@ -104,10 +104,10 @@ public class Operations {
 	}
 	
 	public static double[][] transpose(double[][] matrix){
-		double[][] values = new double[matrix.length][matrix[0].length];
+		double[][] values = new double[matrix[0].length][matrix.length];
 		for(int i =0; i < matrix.length; i++){
 			for(int j = 0; j < matrix[0].length; j++){
-				values[i][j] = matrix[j][i];
+				values[j][i] = matrix[i][j];
 			}
 		}
 		

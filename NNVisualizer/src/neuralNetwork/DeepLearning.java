@@ -1,8 +1,10 @@
 package neuralNetwork;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import matrixMath.Matrix;
+import matrixMath.Operations;
 
 public class DeepLearning {
 
@@ -12,46 +14,25 @@ public class DeepLearning {
 	double rate;
 	int numInputs;
 	
+	int[] layerDimensions;
+	
 	String dataset;
 	
-	ArrayList<Integer> nodes;
-	ArrayList<Matrix> W = new ArrayList<>();
-	ArrayList<Matrix> B = new ArrayList<>();
+	HashMap<String, Matrix> W = new HashMap<>();
+	HashMap<String, Matrix> B = new HashMap<>();
 	
 	//numLayers is the number of layers, including the output node, but not including the inputs
 	//numPer should have a length of 1 less than the number of layers because the output layer always has 1
 	//lr is the learning rate, so the constant we can multiply by
 	//inputs is the number of inputs we will feed into the neural network
 	
-	public DeepLearning(int numLayers, int[] numPer, double lr, int inputs) throws Exception{
-		layers = numLayers;
+	public DeepLearning(int[] layerDims, double lr, int inputs){
 		rate = lr;
 		numInputs = inputs; 
-		
-		
-		
-		nodes.add(numInputs);
-		
-		for(int i =0; i < numLayers; i++){
-			nodes.add(numPer[i]);
-		}
-		
-		nodes.add(1);
-		
-		
-		
-		if(numPer.length != layers-1){
-			//Invalid dimensions
-			throw new Exception();
-		}
-		
-		for(int i = 0; i < layers; i++){
-			W.add(matrixMath.Operations.generate2D(nodes.get(i+1), nodes.get(i)));
-			B.add(matrixMath.Operations.generate2D(nodes.get(i+1), 1));
-		}
+		layerDimensions = layerDims;
 		
 		//Generated a random W and B
-		
+		initializeParameters(new int[] {inputs, 3,5,3});
 	}
 	
 	
@@ -90,6 +71,11 @@ public class DeepLearning {
 		return false;
 	}
 	
-	
+	public void initializeParameters(int[] layerDims) {
+		for(int i =1; i < layerDims.length; i++) {
+			W.put("W"+String.valueOf(i), Operations.generate2D(layerDims[i], layerDims[i-1]));
+			B.put("B" + String.valueOf(i), Operations.generate2D(layerDims[i], 1));
+		}
+	}
 	
 }
