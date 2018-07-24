@@ -20,7 +20,7 @@ public class ActivationFunction {
 	//Performs Sigmoid function on each element in a Matrix;
 	public static Matrix sigmoid(Matrix input){
 		int rows = input.rows;
-		int cols = input.cols;
+		int cols = input.getCols();
 		double[][] data = new double[rows][cols];
 		for(int i =0; i < rows; i++) {
 			for(int j = 0; j < cols; j++) {
@@ -38,7 +38,7 @@ public class ActivationFunction {
 	//Returns derivative of the sigmoid function on each element in a Matrix
 	public static Matrix slopeSigmoid(Matrix input){
 		int rows = input.rows;
-		int cols = input.cols;
+		int cols = input.getCols();
 		double[][] data = new double[rows][cols];
 		for(int i =0; i < rows; i++) {
 			for(int j = 0; j < cols; j++) {
@@ -56,7 +56,7 @@ public class ActivationFunction {
 	//Returns the Tanh of each element in a Matrix
 	public static Matrix tanh(Matrix input){
 		int rows = input.rows;
-		int cols = input.cols;
+		int cols = input.getCols();
 		double[][] data = new double[rows][cols];
 		for(int i =0; i < rows; i++) {
 			for(int j = 0; j < cols; j++) {
@@ -72,7 +72,7 @@ public class ActivationFunction {
 	
 	public static Matrix slopeTanh(Matrix input){
 		int rows = input.rows;
-		int cols = input.cols;
+		int cols = input.getCols();
 		double[][] data = new double[rows][cols];
 		for(int i =0; i < rows; i++) {
 			for(int j = 0; j < cols; j++) {
@@ -92,7 +92,7 @@ public class ActivationFunction {
 	
 	public static Matrix RELU(Matrix input){
 		int rows = input.rows;
-		int cols = input.cols;
+		int cols = input.getCols();
 		double[][] data = new double[rows][cols];
 		for(int i =0; i < rows; i++) {
 			for(int j = 0; j < cols; j++) {
@@ -108,7 +108,7 @@ public class ActivationFunction {
 	
 	public static Matrix slopeRELU(Matrix input){
 		int rows = input.rows;
-		int cols = input.cols;
+		int cols = input.getCols();
 		double[][] data = new double[rows][cols];
 		for(int i =0; i < rows; i++) {
 			for(int j = 0; j < cols; j++) {
@@ -124,7 +124,7 @@ public class ActivationFunction {
 	
 	public static Matrix LeakyRELU(Matrix input){
 		int rows = input.rows;
-		int cols = input.cols;
+		int cols = input.getCols();
 		double[][] data = new double[rows][cols];
 		for(int i =0; i < rows; i++) {
 			for(int j = 0; j < cols; j++) {
@@ -140,7 +140,7 @@ public class ActivationFunction {
 	
 	public static Matrix slopeLeakyRELU(Matrix input){
 		int rows = input.rows;
-		int cols = input.cols;
+		int cols = input.getCols();
 		double[][] data = new double[rows][cols];
 		for(int i =0; i < rows; i++) {
 			for(int j = 0; j < cols; j++) {

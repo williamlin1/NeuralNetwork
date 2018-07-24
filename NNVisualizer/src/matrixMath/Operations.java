@@ -76,6 +76,57 @@ public class Operations {
 		return new Matrix(values);
 	}
 	
+	public static double sum(Matrix matrix) {
+		double temp = 0;
+		if(matrix.rows == 1) {
+			for(int i =0; i < matrix.cols; i++) {
+				temp += matrix.data[0][i];
+			}
+		}else if(matrix.cols == 1) {
+			for(int i =0; i < matrix.rows; i++) {
+				temp += matrix.data[i][0];
+			}
+		}
+		return temp;
+	}
+	
+	public static Matrix log(Matrix matrix) {
+		double[][] values = new double[matrix.rows][matrix.cols];
+
+		for(int i =0; i < matrix.rows; i++){
+			for(int j = 0; j < matrix.cols; j++){
+				values[i][j] = Math.log(matrix.data[i][j]);
+			}
+		}
+		
+		return new Matrix(values);
+	}
+	
+	public static Matrix sAdd(Matrix matrix, double scalar) {
+		double[][] values = new double[matrix.rows][matrix.cols];
+
+		for(int i =0; i < matrix.rows; i++){
+			for(int j = 0; j < matrix.cols; j++){
+				values[i][j] = matrix.data[i][j]+scalar;
+			}
+		}
+		
+		return new Matrix(values);
+	}
+
+	
+	public static Matrix sMultiply(Matrix matrix, double scalar) {
+		double[][] values = new double[matrix.rows][matrix.cols];
+
+		for(int i =0; i < matrix.rows; i++){
+			for(int j = 0; j < matrix.cols; j++){
+				values[i][j] = matrix.data[i][j]*scalar;
+			}
+		}
+		
+		return new Matrix(values);
+	}
+	
 	public static Matrix multiply(Matrix first, Matrix second){
 		double[][] values = new double[first.rows][first.cols];
 		

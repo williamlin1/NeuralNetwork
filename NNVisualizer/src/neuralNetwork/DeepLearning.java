@@ -126,6 +126,16 @@ public class DeepLearning {
 		return false;
 	}
 	
+	public double costComputation(Matrix AL, Matrix Y) {
+		int m = Y.getCols();
+		
+		double cost = (-1/m*1.0)*Operations.sum(
+				Operations.broadcastSum((Operations.multiply(Operations.log(AL), Y)),
+				Operations.multiply(Operations.sAdd(Operations.sMultiply(Y,-1),1.0), Operations.log(
+						Operations.sAdd(Operations.sMultiply(AL,-1),1.0)))));
+		return cost;
+	}
+	
 	public void initializeParameters(int[] layerDims) {
 		for(int i =1; i < layerDims.length; i++) {
 			W.put("W"+String.valueOf(i), Operations.generate2D(layerDims[i], layerDims[i-1]));
