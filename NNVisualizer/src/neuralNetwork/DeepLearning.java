@@ -5,6 +5,11 @@ import java.util.HashMap;
 
 import matrixMath.*;
 
+/*
+ * A Java based Deep Learning neural network program based off of
+ * Andrew Ng's Python deep learning tutorials
+ */
+
 public class DeepLearning {
 
 	
@@ -31,7 +36,12 @@ public class DeepLearning {
 		layerDimensions = layerDims;
 		
 		//Generated a random W and B
-		initializeParameters(new int[] {inputs, 3,5,3});
+		int[] temp = new int[layerDims.length+1];
+		temp[0] = inputs;
+		for(int i =0; i < layerDims.length; i++) {
+			temp[i+1] = layerDims[i];
+		}
+		initializeParameters(temp);
 	}
 	
 	
@@ -61,7 +71,7 @@ public class DeepLearning {
 		return container;
 	}
 	
-	public Container forwardProp(Matrix prevA, Matrix W, Matrix B, String function){
+	public Container linearForwardProp(Matrix prevA, Matrix W, Matrix B, String function){
 		Container linearResult = linearForward(prevA, W, B);
 		Matrix A;
 		if(function.equals("RELU")) {
@@ -78,7 +88,27 @@ public class DeepLearning {
 		cache.put("W", ((HashMap<String,Object>) linearResult.getCache().get("cache")).get("W"));
 		cache.put("B", ((HashMap<String,Object>) linearResult.getCache().get("cache")).get("B"));
 		cache.put("Z", linearResult.getCache().get("Z"));
-		return new Container(cache);
+		temp.put("cache", cache);
+		return new Container(temp);
+	}
+	
+	public Container fowardProp(Matrix X, Container parameters) {
+		ArrayList<Container> caches = new ArrayList<>();
+		Matrix A = X;
+		int L = parameters.size();
+		String len = String.valueOf(L);
+		for(int i =1; i < L; i++) {
+			Matrix A_prev = A;
+			Container cache = linearForwardProp(A_prev,W.get("W"+String.valueOf(i)),
+					B.get("B"+String.valueOf(i)),"RELU");
+			caches.add(cache);	
+		}
+		Container last = linearForwardProp(A, W.get("W"+len),B.get("W"+len),"Sigmoid");
+		caches.add(last);
+		HashMap<String, Object> temp = new HashMap<>();
+		temp.put("AL", last.getCache().get("A"));
+		temp.put("caches",caches);
+		return new Container(temp);
 	}
 	
 	public double backProp(){

@@ -13,4 +13,8 @@ public class Container {
 	public HashMap<String,Object> getCache() {
 		return cache;
 	}
+	
+	public int size() {
+		return cache.size();
+	}
 }
